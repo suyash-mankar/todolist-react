@@ -93,7 +93,16 @@ function App() {
           <div className={styles.completedTasks}>
             <h3>COMPLETED TASKS</h3>
             {completedTasks.map((task) => {
-              return <CompletedTaskCard task={task} key={task._id} />;
+              return (
+                <CompletedTaskCard
+                  task={task}
+                  key={task._id}
+                  completedTasks={completedTasks}
+                  uncompletedTasks={uncompletedTasks}
+                  setCompletedTasks={setCompletedTasks}
+                  setUncompletedTasks={setUncompletedTasks}
+                />
+              );
             })}
           </div>
         </div>

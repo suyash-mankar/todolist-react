@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../styles/taskCard.module.css";
-import { useState, useEffect } from "react";
 
 export default function UncompletedTaskCard({
   task,
@@ -28,9 +27,15 @@ export default function UncompletedTaskCard({
     setUncompletedTasks(newUncompletedTasks);
   };
 
-  const handleDelete = (e) => {
+  const handleDelete = async (e) => {
     e.preventDefault();
-    console.log(e);
+    const res = await fetch(`/tasks/${e.target.value}`, {
+      method: "DELETE",
+    });
+    let newUncompletedTasks = uncompletedTasks.filter((_task) => {
+      return _task._id !== e.target.value;
+    });
+    setUncompletedTasks(newUncompletedTasks);
   };
 
   return (
