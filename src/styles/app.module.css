@@ -1,0 +1,21 @@
+.outerContainer {
+  border: 1px solid grey;
+  width: 50%;
+  margin: 150px auto;
+}
+
+.tasksContainer {
+  display: flex;
+}
+
+.completedTasks {
+  width: 50%;
+}
+
+.completedTasks p {
+  text-decoration: line-through;
+}
+
+.uncompletedTasks {
+  width: 50%;
+}
