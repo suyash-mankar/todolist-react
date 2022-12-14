@@ -10,9 +10,12 @@ export default function CompletedTaskCard({
 }) {
   // Delete the task in the database by making a DELETE request
   const handleDelete = async (taskId) => {
-    const res = await fetch(`/tasks/${taskId}`, {
-      method: "DELETE",
-    });
+    const res = await fetch(
+      `${process.env.REACT_APP_BASE_URL}/tasks/${taskId}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     // remove the task from the frontend without refreshing
     let newCompletedTasks = completedTasks.filter((_task) => {
@@ -23,15 +26,18 @@ export default function CompletedTaskCard({
 
   // Update the completed field of task in database by making a PUT request
   const handleModify = async (taskId) => {
-    let response = await fetch(`/tasks/${taskId}`, {
-      method: "PUT",
-      body: JSON.stringify({
-        completed: false,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
+    let response = await fetch(
+      `${process.env.REACT_APP_BASE_URL}/tasks/${taskId}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          completed: false,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
+    );
     response = await response.json();
 
     // Update the tasks in the frontend without refreshing

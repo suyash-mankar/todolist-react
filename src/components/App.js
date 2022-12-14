@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     const getData = async () => {
       // fetch the data from database
-      let response = await fetch("/tasks");
+      let response = await fetch(`${process.env.REACT_APP_BASE_URL}/tasks`);
       response = await response.json();
       let tasks = response.tasks;
 
@@ -51,7 +51,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // send a post request to create a new task with task title
-    let response = await fetch("/tasks/create", {
+    let response = await fetch(`${process.env.REACT_APP_BASE_URL}/tasks/create`, {
       method: "POST",
       body: JSON.stringify({
         title: taskTitle,
