@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/taskCard.module.css";
+import styles from "../styles/tasksCard.module.css";
 
 export default function UncompletedTaskCard({
   task,
@@ -8,9 +8,8 @@ export default function UncompletedTaskCard({
   completedTasks,
   uncompletedTasks,
 }) {
-  const handleDone = async (e) => {
-    e.preventDefault();
-    let response = await fetch(`/tasks/${e.target.value}`, {
+  const handleDone = async (taskId) => {
+    let response = await fetch(`/tasks/${taskId}`, {
       method: "PUT",
       body: JSON.stringify({
         completed: true,
@@ -22,31 +21,40 @@ export default function UncompletedTaskCard({
     response = await response.json();
     setCompletedTasks([response.task, ...completedTasks]);
     let newUncompletedTasks = uncompletedTasks.filter((task) => {
-      return task._id !== e.target.value;
+      return task._id !== taskId;
     });
     setUncompletedTasks(newUncompletedTasks);
   };
 
-  const handleDelete = async (e) => {
-    e.preventDefault();
-    const res = await fetch(`/tasks/${e.target.value}`, {
+  const handleDelete = async (taskId) => {
+    const res = await fetch(`/tasks/${taskId}`, {
       method: "DELETE",
     });
     let newUncompletedTasks = uncompletedTasks.filter((_task) => {
-      return _task._id !== e.target.value;
+      return _task._id !== taskId;
     });
     setUncompletedTasks(newUncompletedTasks);
   };
 
   return (
     <div className={styles.card}>
-      <p>{task.title}</p>
-      <button onClick={handleDone} value={task._id}>
-        done
-      </button>
-      <button onClick={handleDelete} value={task._id}>
-        delete
-      </button>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/190/190411.png"
+          alt="trash"
+          onClick={() => handleDone(task._id)}
+          className={styles.doneImg}
+        />
+        <p>{task.title}</p>
+      </div>
+
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/5028/5028066.png"
+        alt="trash"
+        onClick={() => handleDelete(task._id)}
+        className={styles.deleteImg}
+      />
     </div>
   );
 }
