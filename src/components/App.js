@@ -89,6 +89,7 @@ function App() {
           >
             Create
           </Button>
+          {/* To minimize or maximize the app */}
           <img
             className={styles.minBtn}
             src={

@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../styles/tasksCard.module.css";
-import { useState, useEffect } from "react";
 
 export default function UncompletedTaskCard({
   task,
@@ -9,6 +8,8 @@ export default function UncompletedTaskCard({
   completedTasks,
   uncompletedTasks,
 }) {
+
+  // Update the completed field of task in database by making a PUT request
   const handleDone = async (taskId) => {
     let response = await fetch(`/tasks/${taskId}`, {
       method: "PUT",
@@ -21,6 +22,7 @@ export default function UncompletedTaskCard({
     });
     response = await response.json();
 
+    // Update the tasks in the frontend without refreshing
     setCompletedTasks([response.task, ...completedTasks]);
     let newUncompletedTasks = uncompletedTasks.filter((task) => {
       return task._id !== taskId;
@@ -28,10 +30,13 @@ export default function UncompletedTaskCard({
     setUncompletedTasks(newUncompletedTasks);
   };
 
+  // Delete the task in the database by making a DELETE request
   const handleDelete = async (taskId) => {
     const res = await fetch(`/tasks/${taskId}`, {
       method: "DELETE",
     });
+
+    // remove the task from the frontend without refreshing
     let newUncompletedTasks = uncompletedTasks.filter((_task) => {
       return _task._id !== taskId;
     });
@@ -41,6 +46,7 @@ export default function UncompletedTaskCard({
   return (
     <div className={styles.card}>
       <div style={{ display: "flex", alignItems: "center" }}>
+      {/* acts as done btn */}
         <img
           src="https://cdn-icons-png.flaticon.com/512/190/190411.png"
           alt="trash"
@@ -49,7 +55,7 @@ export default function UncompletedTaskCard({
         />
         <p>{task.title}</p>
       </div>
-
+      {/* acts as delete btn */}
       <img
         src="https://cdn-icons-png.flaticon.com/512/5028/5028066.png"
         alt="trash"
