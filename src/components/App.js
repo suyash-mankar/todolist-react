@@ -51,18 +51,22 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // send a post request to create a new task with task title
-    let response = await fetch(`${process.env.REACT_APP_BASE_URL}/tasks/create`, {
-      method: "POST",
-      body: JSON.stringify({
-        title: taskTitle,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
+    let response = await fetch(
+      `${process.env.REACT_APP_BASE_URL}/tasks/create`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          title: taskTitle,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
+    );
     response = await response.json();
     // add the newly created task in the uncompleted tasks state
     setUncompletedTasks([response.task, ...uncompletedTasks]);
+    setTaskTitle("");
   };
 
   return (
