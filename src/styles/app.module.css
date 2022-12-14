@@ -5,7 +5,6 @@
   background-color: #212529;
   border-radius: 20px;
   box-shadow: -10px 10px 10px 10px black;
-
 }
 
 h3,
@@ -15,7 +14,7 @@ p {
 
 form {
   width: 100%;
-  margin: 10px 40px;
+  margin: 10px 15px;
   display: flex;
   align-items: center;
 }
@@ -29,7 +28,6 @@ input {
   background: #151414;
   border: 1px solid black;
   box-shadow: -2px 2px 3px 1px black;
-
 }
 
 .newTaskBtn {
@@ -37,9 +35,8 @@ input {
   border-radius: 10px;
   padding: 5px 5px;
   font-size: 1.1rem;
-  margin-left: 50px;
+  margin-left: 30px;
   box-shadow: -2px 2px 3px 1px black;
-
 }
 
 .tasksContainer {
@@ -52,6 +49,7 @@ p {
 
 .completedTasks {
   width: 50%;
+  display: block;
 }
 
 .completedTasks p {
@@ -69,17 +67,22 @@ h3 {
   border-radius: 20px;
   margin: 20px 12px;
   box-shadow: -2px 2px 3px 1px black;
-
 }
 
-.uncompletedTasks h3:hover{
+.uncompletedTasks h3:hover {
   box-shadow: 0px 0px 3px 2px red;
-
 }
 
-.completedTasks h3:hover{
+.completedTasks h3:hover {
   box-shadow: 0px 0px 3px 2px green;
-
 }
 
+.minBtn {
+  width: 30px;
+  height:30px;
+}
 
+.minBtn:hover {
+  box-shadow: 0px 0px 3px 3px #0b5ed7;
+  border-radius: 50%;
+}

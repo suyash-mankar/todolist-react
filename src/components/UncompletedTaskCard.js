@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../styles/tasksCard.module.css";
+import { useState, useEffect } from "react";
 
 export default function UncompletedTaskCard({
   task,
@@ -19,6 +20,7 @@ export default function UncompletedTaskCard({
       },
     });
     response = await response.json();
+
     setCompletedTasks([response.task, ...completedTasks]);
     let newUncompletedTasks = uncompletedTasks.filter((task) => {
       return task._id !== taskId;
@@ -39,7 +41,6 @@ export default function UncompletedTaskCard({
   return (
     <div className={styles.card}>
       <div style={{ display: "flex", alignItems: "center" }}>
-        
         <img
           src="https://cdn-icons-png.flaticon.com/512/190/190411.png"
           alt="trash"

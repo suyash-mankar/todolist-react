@@ -21,9 +21,18 @@ img {
   border-radius: 50%;
 }
 
+img:hover {
+  cursor: pointer;
+}
+
 .doneImg:hover {
   box-shadow: 0px 0px 3px 3px #32ba7c;
   border-radius: 50%;
+}
+
+.deleteImg {
+  width: 30px;
+  height: 30px;
 }
 
 .deleteImg:hover {

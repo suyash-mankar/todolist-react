@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import CompletedTaskCard from "./CompletedTaskCard";
 import UncompletedTaskCard from "./UncompletedTaskCard";
-import styles from "../styles/app.module.css";
 import Button from "react-bootstrap/Button";
+import styles from "../styles/app.module.css";
 
 function App() {
   const [completedTasks, setCompletedTasks] = useState([]);
   const [uncompletedTasks, setUncompletedTasks] = useState([]);
   const [taskTitle, setTaskTitle] = useState("");
+  const [isMinimized, setIsMinimized] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -66,7 +67,10 @@ function App() {
 
   return (
     <div>
-      <div className={styles.outerContainer}>
+      <div
+        className={styles.outerContainer}
+        style={isMinimized ? { width: "30%" } : { width: "50%" }}
+      >
         {/* form to create a new task */}
         <form onSubmit={handleSubmit}>
           <input
@@ -75,14 +79,39 @@ function App() {
             onChange={(e) => setTaskTitle(e.target.value)}
             placeholder="Enter New Task"
           />
-          <Button type="submit" variant="primary" className={styles.newTaskBtn}>
-            Create New Task
+          <Button
+            type="submit"
+            variant="primary"
+            className={styles.newTaskBtn}
+            style={
+              isMinimized ? { margin: "0 0 0 20px" } : { marginRight: "20px" }
+            }
+          >
+            Create
           </Button>
+          <img
+            className={styles.minBtn}
+            src={
+              isMinimized
+                ? "https://cdn-icons-png.flaticon.com/512/7598/7598649.png"
+                : "https://cdn-icons-png.flaticon.com/512/8345/8345651.png"
+            }
+            alt="minimize"
+            onClick={() => {
+              setIsMinimized(!isMinimized);
+            }}
+            style={{
+              borderRadius: "0px",
+            }}
+          />
         </form>
 
         <div className={styles.tasksContainer}>
           {/* uncompleted tasks section */}
-          <div className={styles.uncompletedTasks}>
+          <div
+            className={styles.uncompletedTasks}
+            style={isMinimized ? { width: "100%" } : { width: "50%" }}
+          >
             <h3>Tasks To Do</h3>
             {uncompletedTasks.map((task) => {
               return (
@@ -99,7 +128,10 @@ function App() {
           </div>
 
           {/* completed tasks section */}
-          <div className={styles.completedTasks}>
+          <div
+            className={styles.completedTasks}
+            style={isMinimized ? { display: "none" } : { width: "block" }}
+          >
             <h3>Completed Tasks</h3>
             {completedTasks.map((task) => {
               return (
